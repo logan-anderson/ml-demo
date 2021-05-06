@@ -13,7 +13,6 @@ function App() {
     x1: 0.001,
   });
   const [error, setError] = useState(0);
-  const deps = JSON.stringify(vars);
   useEffect(() => {
     let total = 0;
     data.forEach((dataPt) => {
@@ -26,7 +25,7 @@ function App() {
     });
     const err = Math.sqrt(total / data.length);
     setError(err);
-  }, [deps]);
+  }, [vars.x0, vars.x1]);
   return (
     <div className="App">
       <form>
