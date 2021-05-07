@@ -2,6 +2,15 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import { data } from "./data";
 import { MathComponent } from "mathjax-react";
+import {
+  MarkSeries,
+  XYPlot,
+  VerticalGridLines,
+  HorizontalGridLines,
+  XAxis,
+  YAxis,
+  LineSeries,
+} from "react-vis";
 
 const predictaion = (x0, x1, housePrice) => {
   return x0 + x1 * housePrice;
@@ -73,6 +82,27 @@ function App() {
         </div>
       </div>
       <div>Error: {error}</div>
+      <XYPlot height={300} width={300}>
+        <MarkSeries
+          data={data.map((x) => ({ x: x.SalePrice, y: x.LotArea }))}
+        />
+        <LineSeries
+          data={[
+            {
+              x: vars.x0,
+              y: 0,
+            },
+            {
+              x: vars.x0 + vars.x1 * 60000,
+              y: 60000,
+            },
+          ]}
+        />
+        <VerticalGridLines />
+        <HorizontalGridLines />
+        <XAxis />
+        <YAxis />
+      </XYPlot>
     </div>
   );
 }
